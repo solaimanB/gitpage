@@ -1,11 +1,537 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <title>MijnGit</title>
-    <link rel="stylesheet" href="gitpage.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jouw Naam — Developer & Creator Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            200: '#c7d2fe',
+                            300: '#a5b4fc',
+                            400: '#818cf8',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            800: '#3730a3',
+                            900: '#312e81',
+                        }
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                        'fade-in-up': 'fadeInUp 0.6s ease-out forwards',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body>
-<h1>Mijn Git!ttttt</h1>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 font-sans antialiased transition-colors duration-300 selection:bg-primary-500 selection:text-white overflow-x-hidden">
+
+<div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+    <div class="absolute top-0 -left-4 w-72 h-72 bg-primary-400/20 dark:bg-primary-600/20 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-70 animate-blob"></div>
+    <div class="absolute top-0 -right-4 w-72 h-72 bg-purple-400/20 dark:bg-purple-600/20 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-70 animate-blob" style="animation-delay: 2s;"></div>
+    <div class="absolute -bottom-8 left-20 w-72 h-72 bg-cyan-400/20 dark:bg-cyan-600/20 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-70 animate-blob" style="animation-delay: 4s;"></div>
+</div>
+
+<header class="sticky top-0 z-50 w-full backdrop-blur-md bg-white/75 dark:bg-slate-950/75 border-b border-slate-200/80 dark:border-slate-800/80 transition-colors duration-300">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+            <a href="#" class="flex items-center gap-2 font-bold text-xl tracking-tight group">
+                    <span class="w-8 h-8 rounded-xl bg-gradient-to-tr from-primary-600 to-purple-500 flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform">
+                        <i data-lucide="terminal" class="w-4 h-4"></i>
+                    </span>
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-600 dark:from-white dark:to-slate-300">
+                        JouwNaam<span class="text-primary-600 dark:text-primary-400">.dev</span>
+                    </span>
+            </a>
+
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600 dark:text-slate-300">
+                <a href="#over-mij" class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Over mij</a>
+                <a href="#projecten" class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Projecten</a>
+                <a href="#contact" class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Contact</a>
+            </nav>
+
+            <div class="flex items-center gap-3">
+                <!-- Donkere/Lichte Modus Knop -->
+                <button id="theme-toggle" aria-label="Wissel tussen donkere en lichte modus" class="p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-all focus:outline-none focus:ring-2 focus:ring-primary-500">
+                    <i id="theme-toggle-dark-icon" data-lucide="moon" class="w-5 h-5 hidden"></i>
+                    <i id="theme-toggle-light-icon" data-lucide="sun" class="w-5 h-5 hidden"></i>
+                </button>
+
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profiel" class="hidden sm:flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-900 text-sm font-medium transition-all shadow-sm">
+                    <i data-lucide="github" class="w-4 h-4"></i>
+                    <span>GitHub</span>
+                </a>
+
+                <button id="mobile-menu-btn" aria-label="Open menu" class="md:hidden p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200">
+                    <i data-lucide="menu" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-950/95 backdrop-blur-lg px-4 pt-2 pb-6 space-y-2">
+        <a href="#over-mij" class="mobile-link block px-3 py-2.5 rounded-xl text-base font-medium hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Over mij</a>
+        <a href="#projecten" class="mobile-link block px-3 py-2.5 rounded-xl text-base font-medium hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Projecten</a>
+        <a href="#contact" class="mobile-link block px-3 py-2.5 rounded-xl text-base font-medium hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Contact</a>
+        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-3 py-2.5 rounded-xl text-base font-medium text-primary-600 dark:text-primary-400">
+            <i data-lucide="github" class="w-5 h-5"></i>
+            <span>Bekijk mijn GitHub</span>
+        </a>
+    </div>
+</header>
+
+<main>
+
+    <section class="relative pt-20 pb-24 sm:pt-28 sm:pb-32 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+        <div class="text-center max-w-3xl mx-auto animate-fade-in-up">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary-50 dark:bg-primary-950/60 border border-primary-200 dark:border-primary-800 text-primary-700 dark:text-primary-300 text-xs sm:text-sm font-medium mb-8 shadow-sm">
+                    <span class="relative flex h-2.5 w-2.5">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                    </span>
+                Beschikbaar voor nieuwe projecten & samenwerkingen
+            </div>
+
+            <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-6 leading-tight">
+                Hoi, ik ben <span class="bg-clip-text text-transparent bg-gradient-to-r from-primary-600 via-purple-500 to-cyan-500">Jouw Naam</span>.<br>
+                Ik bouw moderne webapplicaties.
+            </h1>
+
+            <p class="text-lg sm:text-xl text-slate-600 dark:text-slate-400 mb-10 leading-relaxed max-w-2xl mx-auto">
+                Een gepassioneerde softwareontwikkelaar uit Nederland. Ik combineer strak design met schone, schaalbare code om gebruiksvriendelijke digitale ervaringen te creëren.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#projecten" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-2xl bg-primary-600 hover:bg-primary-700 text-white font-semibold shadow-lg shadow-primary-500/25 hover:shadow-primary-500/40 transition-all transform hover:-translate-y-0.5">
+                    <span>Bekijk mijn werk</span>
+                    <i data-lucide="arrow-down-right" class="w-5 h-5"></i>
+                </a>
+                <a href="#contact" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-2xl bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-900 dark:text-white font-semibold border border-slate-200 dark:border-slate-800 shadow-sm transition-all transform hover:-translate-y-0.5">
+                    <i data-lucide="mail" class="w-5 h-5 text-slate-500"></i>
+                    <span>Neem contact op</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="over-mij" class="py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-5 flex justify-center">
+                <div class="relative group w-64 h-64 sm:w-80 sm:h-80">
+                    <div class="absolute -inset-2 rounded-3xl bg-gradient-to-tr from-primary-600 to-purple-500 opacity-30 blur-lg group-hover:opacity-50 transition-opacity"></div>
+                    <div class="relative w-full h-full rounded-3xl overflow-hidden bg-slate-200 dark:bg-slate-800 border-2 border-white dark:border-slate-700 shadow-xl">
+                        <img
+                                src="https://placehold.co/600x600/4f46e5/ffffff?text=Jouw+Foto"
+                                onerror="this.onerror=null; this.src='https://placehold.co/600x600/1e293b/ffffff?text=Avatar';"
+                                alt="Profielfoto van Jouw Naam"
+                                class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                        >
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-7 space-y-6">
+                <div class="inline-flex items-center gap-2 text-primary-600 dark:text-primary-400 font-semibold text-sm uppercase tracking-wider">
+                    <i data-lucide="user" class="w-4 h-4"></i>
+                    <span>Over mij</span>
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white">
+                    Van idee naar werkende code, met oog voor detail.
+                </h2>
+                <p class="text-slate-600 dark:text-slate-400 leading-relaxed text-base sm:text-lg">
+                    Al van jongs af aan ben ik gefascineerd door hoe technologie problemen kan oplossen. Wat begon met het sleutelen aan simpele HTML-pagina's is uitgegroeid tot het ontwikkelen van volledige webapplicaties, open-source tools en creatieve projecten op GitHub.
+                </p>
+                <p class="text-slate-600 dark:text-slate-400 leading-relaxed text-base sm:text-lg">
+                    Wanneer ik niet achter mijn scherm zit om code te schrijven, vind ik het leuk om nieuwe technologieën te verkennen, bij te dragen aan open-source communities en te genieten van een goede kop koffie.
+                </p>
+
+                <div class="pt-4">
+                    <h3 class="text-sm font-semibold text-slate-900 dark:text-white uppercase tracking-wider mb-3">
+                        Technologieën waar ik graag mee werk:
+                    </h3>
+                    <div class="flex flex-wrap gap-2.5">
+                        <span class="px-3.5 py-1.5 rounded-xl text-sm font-medium bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">HTML5 & CSS3</span>
+                        <span class="px-3.5 py-1.5 rounded-xl text-sm font-medium bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">JavaScript (ES6+)</span>
+                        <span class="px-3.5 py-1.5 rounded-xl text-sm font-medium bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">TypeScript</span>
+                        <span class="px-3.5 py-1.5 rounded-xl text-sm font-medium bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">React / Next.js</span>
+                        <span class="px-3.5 py-1.5 rounded-xl text-sm font-medium bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">Tailwind CSS</span>
+                        <span class="px-3.5 py-1.5 rounded-xl text-sm font-medium bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">Node.js</span>
+                        <span class="px-3.5 py-1.5 rounded-xl text-sm font-medium bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">Python</span>
+                        <span class="px-3.5 py-1.5 rounded-xl text-sm font-medium bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">Git & GitHub</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projecten" class="py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4">
+            <div>
+                <div class="inline-flex items-center gap-2 text-primary-600 dark:text-primary-400 font-semibold text-sm uppercase tracking-wider mb-2">
+                    <i data-lucide="folder-git-2" class="w-4 h-4"></i>
+                    <span>Portfolio</span>
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white">
+                    Uitgelichte Projecten
+                </h2>
+            </div>
+
+            <!-- Filter Knoppen -->
+            <div class="flex flex-wrap gap-2" id="project-filters">
+                <button data-filter="all" class="filter-btn active px-4 py-2 rounded-xl text-sm font-medium bg-primary-600 text-white shadow-sm transition-all">Alles</button>
+                <button data-filter="web" class="filter-btn px-4 py-2 rounded-xl text-sm font-medium bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-primary-500 transition-all">Web Apps</button>
+                <button data-filter="tool" class="filter-btn px-4 py-2 rounded-xl text-sm font-medium bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-primary-500 transition-all">Tools & CLI</button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
+
+            <article data-category="web" class="project-card group flex flex-col justify-between rounded-3xl bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm border border-slate-200/80 dark:border-slate-800/80 overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <div>
+                    <div class="relative h-48 overflow-hidden bg-slate-100 dark:bg-slate-800">
+                        <img
+                                src="https://placehold.co/800x450/4f46e5/ffffff?text=TaakManager+Pro"
+                                onerror="this.onerror=null; this.src='https://placehold.co/800x450/334155/ffffff?text=Project+Preview';"
+                                alt="Screenshot van TaakManager Pro"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        >
+                        <div class="absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-semibold bg-slate-900/75 text-white backdrop-blur-md">
+                            Web App
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                            TaakManager Pro
+                        </h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">
+                            Een snelle, minimalistische Kanban-applicatie om dagelijkse taken en projecten te organiseren. Inclusief lokale opslag en drag-and-drop ondersteuning.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs font-medium px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">JavaScript</span>
+                            <span class="text-xs font-medium px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Tailwind CSS</span>
+                            <span class="text-xs font-medium px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">LocalStorage</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="px-6 py-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between bg-slate-50/50 dark:bg-slate-950/30">
+                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                        <i data-lucide="github" class="w-4 h-4"></i>
+                        <span>Broncode</span>
+                    </a>
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-sm font-semibold text-primary-600 dark:text-primary-400 hover:underline">
+                        <span>Live Demo</span>
+                        <i data-lucide="external-link" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </article>
+
+            <article data-category="tool" class="project-card group flex flex-col justify-between rounded-3xl bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm border border-slate-200/80 dark:border-slate-800/80 overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <div>
+                    <div class="relative h-48 overflow-hidden bg-slate-100 dark:bg-slate-800">
+                        <img
+                                src="https://placehold.co/800x450/0891b2/ffffff?text=GitStats+CLI"
+                                onerror="this.onerror=null; this.src='https://placehold.co/800x450/334155/ffffff?text=Project+Preview';"
+                                alt="Screenshot van GitStats CLI"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        >
+                        <div class="absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-semibold bg-slate-900/75 text-white backdrop-blur-md">
+                            CLI Tool
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                            GitStats CLI
+                        </h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">
+                            Een command-line tool geschreven in Python die overzichtelijke statistieken en grafieken genereert van je lokale Git-repositories rechtstreeks in je terminal.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs font-medium px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Python</span>
+                            <span class="text-xs font-medium px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Git</span>
+                            <span class="text-xs font-medium px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Open Source</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="px-6 py-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between bg-slate-50/50 dark:bg-slate-950/30">
+                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                        <i data-lucide="github" class="w-4 h-4"></i>
+                        <span>Broncode</span>
+                    </a>
+                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-sm font-semibold text-primary-600 dark:text-primary-400 hover:underline">
+                        <span>Documentatie</span>
+                        <i data-lucide="external-link" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </article>
+
+            <article data-category="web" class="project-card group flex flex-col justify-between rounded-3xl bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm border border-slate-200/80 dark:border-slate-800/80 overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <div>
+                    <div class="relative h-48 overflow-hidden bg-slate-100 dark:bg-slate-800">
+                        <img
+                                src="https://placehold.co/800x450/7c3aed/ffffff?text=WeerDashboard+NL"
+                                onerror="this.onerror=null; this.src='https://placehold.co/800x450/334155/ffffff?text=Project+Preview';"
+                                alt="Screenshot van WeerDashboard NL"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        >
+                        <div class="absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-semibold bg-slate-900/75 text-white backdrop-blur-md">
+                            Web App
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                            WeerDashboard NL
+                        </h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">
+                            Real-time weersvoorspellingen en luchtkwaliteit voor alle Nederlandse steden, gebouwd met een moderne REST API en interactieve grafieken.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs font-medium px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">React</span>
+                            <span class="text-xs font-medium px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">REST API</span>
+                            <span class="text-xs font-medium px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Chart.js</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="px-6 py-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between bg-slate-50/50 dark:bg-slate-950/30">
+                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                        <i data-lucide="github" class="w-4 h-4"></i>
+                        <span>Broncode</span>
+                    </a>
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-sm font-semibold text-primary-600 dark:text-primary-400 hover:underline">
+                        <span>Live Demo</span>
+                        <i data-lucide="external-link" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+        <div class="rounded-3xl bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border border-slate-200/80 dark:border-slate-800/80 p-8 sm:p-12 shadow-xl">
+            <div class="text-center max-w-xl mx-auto mb-10">
+                <div class="inline-flex items-center gap-2 text-primary-600 dark:text-primary-400 font-semibold text-sm uppercase tracking-wider mb-2">
+                    <i data-lucide="send" class="w-4 h-4"></i>
+                    <span>Contact</span>
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+                    Laten we samenwerken!
+                </h2>
+                <p class="text-slate-600 dark:text-slate-400">
+                    Heb je een vraag, een leuk projectidee of wil je gewoon even gedag zeggen? Stuur gerust een berichtje of kopieer mijn e-mailadres.
+                </p>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 mb-8">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-primary-100 dark:bg-primary-900/50 text-primary-600 dark:text-primary-400 flex items-center justify-center">
+                        <i data-lucide="mail" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Direct e-mailen</p>
+                        <p id="email-address" class="text-sm sm:text-base font-semibold text-slate-900 dark:text-white">hallo@jouwnaam.nl</p>
+                    </div>
+                </div>
+                <button id="copy-email-btn" type="button" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 text-sm font-medium border border-slate-200 dark:border-slate-700 shadow-sm transition-all">
+                    <i data-lucide="copy" class="w-4 h-4"></i>
+                    <span id="copy-btn-text">Kopieer e-mail</span>
+                </button>
+            </div>
+
+            <form id="contact-form" class="space-y-5">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Naam</label>
+                        <input type="text" id="name" name="name" required placeholder="Jan de Vries" class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">E-mailadres</label>
+                        <input type="email" id="email" name="email" required placeholder="jan@voorbeeld.nl" class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all">
+                    </div>
+                </div>
+                <div>
+                    <label for="message" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Bericht</label>
+                    <textarea id="message" name="message" rows="4" required placeholder="Vertel me over je project of idee..." class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all"></textarea>
+                </div>
+                <button type="submit" class="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-primary-600 hover:bg-primary-700 text-white font-semibold shadow-lg shadow-primary-500/25 transition-all">
+                    <span>Bericht versturen</span>
+                    <i data-lucide="send" class="w-4 h-4"></i>
+                </button>
+            </form>
+
+            <!-- Feedback Melding Box (i.p.v. alert) -->
+            <div id="form-feedback" class="hidden mt-5 p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-200 text-sm flex items-center gap-3">
+                <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-500 shrink-0"></i>
+                <span id="form-feedback-text">Bedankt voor je bericht! Ik neem zo snel mogelijk contact met je op.</span>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="border-t border-slate-200/80 dark:border-slate-800/80 py-10 px-4 sm:px-6 lg:px-8 mt-12">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="text-sm text-slate-500 dark:text-slate-400">
+            &copy; <span id="current-year"></span> Jouw Naam. Gehost op GitHub Pages.
+        </p>
+        <div class="flex items-center gap-4">
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="p-2 rounded-xl text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                <i data-lucide="github" class="w-5 h-5"></i>
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="p-2 rounded-xl text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                <i data-lucide="linkedin" class="w-5 h-5"></i>
+            </a>
+            <a href="mailto:hallo@jouwnaam.nl" aria-label="E-mail" class="p-2 rounded-xl text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                <i data-lucide="mail" class="w-5 h-5"></i>
+            </a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    lucide.createIcons();
+
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const darkIcon = document.getElementById('theme-toggle-dark-icon');
+    const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+    function initTheme() {
+        if (localStorage.getItem('color-theme') === 'dark' ||
+            (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            lightIcon.classList.remove('hidden');
+        } else {
+            document.documentElement.classList.remove('dark');
+            darkIcon.classList.remove('hidden');
+        }
+    }
+    initTheme();
+
+    themeToggleBtn.addEventListener('click', () => {
+        darkIcon.classList.toggle('hidden');
+        lightIcon.classList.toggle('hidden');
+
+        if (document.documentElement.classList.contains('dark')) {
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem('color-theme', 'light');
+        } else {
+            document.documentElement.classList.add('dark');
+            localStorage.setItem('color-theme', 'dark');
+        }
+    });
+
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+        });
+    });
+
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => {
+                b.classList.remove('bg-primary-600', 'text-white');
+                b.classList.add('bg-white', 'dark:bg-slate-900', 'text-slate-600', 'dark:text-slate-300');
+            });
+
+            btn.classList.remove('bg-white', 'dark:bg-slate-900', 'text-slate-600', 'dark:text-slate-300');
+            btn.classList.add('bg-primary-600', 'text-white');
+
+            const filterValue = btn.getAttribute('data-filter');
+
+            projectCards.forEach(card => {
+                if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+
+    const copyEmailBtn = document.getElementById('copy-email-btn');
+    const emailAddress = document.getElementById('email-address').textContent;
+    const copyBtnText = document.getElementById('copy-btn-text');
+
+    copyEmailBtn.addEventListener('click', () => {
+        const tempInput = document.createElement('input');
+        tempInput.value = emailAddress;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempInput);
+
+        const originalText = copyBtnText.textContent;
+        copyBtnText.textContent = 'Gekopieerd!';
+        copyEmailBtn.classList.add('border-emerald-500', 'text-emerald-600', 'dark:text-emerald-400');
+
+        setTimeout(() => {
+            copyBtnText.textContent = originalText;
+            copyEmailBtn.classList.remove('border-emerald-500', 'text-emerald-600', 'dark:text-emerald-400');
+        }, 2500);
+    });
+
+    const contactForm = document.getElementById('contact-form');
+    const formFeedback = document.getElementById('form-feedback');
+    const formFeedbackText = document.getElementById('form-feedback-text');
+
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const message = document.getElementById('message').value.trim();
+
+        if (!name || !email || !message) return;
+
+        formFeedbackText.textContent = `Bedankt ${name}! Je bericht is ontvangen. (Tip: koppel een gratis dienst zoals Formspree om berichten direct in je inbox te ontvangen.)`;
+        formFeedback.classList.remove('hidden');
+
+        contactForm.reset();
+
+        setTimeout(() => {
+            formFeedback.classList.add('hidden');
+        }, 7000);
+    });
+</script>
 </body>
 </html>
